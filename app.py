@@ -7,7 +7,7 @@ app = Flask(__name__)
 def index():
     if request.method == "POST":
         searched_keyword = request.form["search"].lower()
-        df = pd.read_csv("SearchTerms_2022.csv")
+        df = pd.read_csv("Search_Terms_2023.csv")
         df = df[df["Search Term"].str.contains(searched_keyword, na=False, case=False)]
         return render_template("index.html", dataframe=df.head(50).to_html(classes="table table-striped", index=False))
     return render_template("index.html", dataframe=None)
