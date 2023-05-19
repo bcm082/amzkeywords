@@ -10,19 +10,25 @@
             text-align: left;
         }
         .search-input {
-            width: 50px;
+            width: 300px;
+        }
+        textarea {
+            width: 100%;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="mt-5">Amazon Keywords</h1>
+        <h1 class="mt-5">Search</h1>
         <form method="POST">
             <div class="input-group mb-3">
                 <input type="text" class="form-control search-input" name="search" placeholder="Enter keyword" required>
                 <button class="btn btn-primary" type="submit">Search</button>
             </div>
         </form>
+        {% if unique_keywords %}
+            <button class="btn btn-secondary mb-3" type="button" data-bs-toggle="modal" data-bs-target="#keywordsModal">Show unique keywords</button>
+        {% endif %}
         {% if dataframe %}
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -31,6 +37,23 @@
             </div>
         {% endif %}
     </div>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="keywordsModal" tabindex="-1">
+        <div class="modal-dialog" style="max-width: 700px;"> <!-- Add a custom width here -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Unique Keywords</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <textarea readonly>{{ unique_keywords }}</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
